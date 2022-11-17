@@ -74,7 +74,7 @@ class ListStoryFragment : Fragment() {
             }
             error.observe(viewLifecycleOwner) {
                 if(it.isNotEmpty()) {
-                    Toast.makeText(activity, "EROR ${it}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(activity, "ERROR $it", Toast.LENGTH_SHORT).show()
                 }
             }
             storyList.observe(viewLifecycleOwner) {
