@@ -93,10 +93,10 @@ class ListStoryFragment : Fragment() {
 
     private fun showSelectedStory(story: Story) {
         Intent(activity, DetailActivity::class.java).also {
-            it.putExtra(DetailActivity.EXTRA_NAME, story.name)
-            it.putExtra(DetailActivity.EXTRA_DATE, story.createdAt)
-            it.putExtra(DetailActivity.EXTRA_DESC, story.description)
-            it.putExtra(DetailActivity.EXTRA_IMAGE, story.photoUrl)
+            it.putExtra(DetailActivity.KEY_NAME, story.name)
+            it.putExtra(DetailActivity.KEY_DATE, story.createdAt)
+            it.putExtra(DetailActivity.KEY_DESC, story.description)
+            it.putExtra(DetailActivity.KEY_IMAGE, story.photoUrl)
             startActivity(it)
         }
     }
