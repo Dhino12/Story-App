@@ -32,37 +32,40 @@ class ListStoryFragment : Fragment() {
     private var viewModel: StoryViewModel? = null
     private var token: String = ""
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setHasOptionsMenu(true)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         binding = FragmentListStoryBinding.inflate(layoutInflater, container, false)
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelFactory((activity as Activity))
-        )[StoryViewModel::class.java]
-
-        return inflater.inflate(R.layout.fragment_list_story, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.rvStory.setHasFixedSize(true)
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelFactory((activity as Activity))
+        )[StoryViewModel::class.java]
+
+        rvStory = binding.rvStory
+
+        userPreference = UserPreference(requireActivity())
+        userModel = userPreference.getUser()
+
         token = userModel.token.toString()
+
         getStory()
 
     }
 
     private fun getStory() {
-        val authToken = "Baerar $token"
+        val authToken = "Bearer $token"
+
         adapter = ListStoryAdapter()
         rvStory.adapter = adapter
+        rvStory.layoutManager = LinearLayoutManager(activity)
+        rvStory.setHasFixedSize(true)
         viewModel?.getStory(authToken)
 
         viewModel?.apply {

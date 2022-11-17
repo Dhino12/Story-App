@@ -28,13 +28,13 @@ class MainActivity : AppCompatActivity() {
         userModel = userPreference.getUser()
         token = userModel.token.toString()
 
-        Log.d(this@MainActivity::class.java.simpleName, "TOKEN : ${token}")
         Handler(Looper.getMainLooper()).postDelayed({
             if(token.isEmpty()) {
+                Log.e(this@MainActivity::class.java.simpleName, "TOKEN : ${token}")
                 startActivity(Intent(this, LoginActivity::class.java))
                 finish()
             }
-        }, 300L)
+        }, 10)
 
         val fragmentManager = supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(ListStoryFragment::class.java.simpleName)
@@ -46,6 +46,5 @@ class MainActivity : AppCompatActivity() {
             Log.d(this@MainActivity::class.java.simpleName, "Fragment Name now : " + ListStoryFragment::class.java.simpleName)
         }
 
-        startActivity(Intent(this, LoginActivity::class.java))
     }
 }
