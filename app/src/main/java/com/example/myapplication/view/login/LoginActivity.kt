@@ -1,5 +1,6 @@
 package com.example.myapplication.view.login
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginScreenBinding
 import com.example.myapplication.preference.User
 import com.example.myapplication.preference.UserPreference
+import com.example.myapplication.view.register.RegisterActivity
 import com.example.myapplication.viewmodel.LoginViewModel
 import com.example.myapplication.viewmodel.ViewModelFactory
 
@@ -29,7 +31,6 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this, ViewModelFactory(this@LoginActivity))[LoginViewModel::class.java]
-
 
         binding.login.setOnClickListener {
             val email = binding.edEmail.text.toString()
@@ -55,8 +56,9 @@ class LoginActivity : AppCompatActivity() {
         }
 
         binding.register.setOnClickListener {
-
+            startActivity(Intent(this@LoginActivity, RegisterActivity::class.java))
         }
+
         viewModel?.let { vmLogin ->
             vmLogin.loading.observe(this) {
                 binding.progressBar.visibility = it

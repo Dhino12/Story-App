@@ -24,9 +24,11 @@ class RegisterActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this, ViewModelFactory(this))[RegisterViewModel::class.java]
 
         binding.register.setOnClickListener {
-            val name = binding.edName.toString()
-            val email = binding.edEmail.toString()
-            val password = binding.edPassword.toString()
+            val name = binding.edName.text.toString()
+            val email = binding.edEmail.text.toString()
+            val password = binding.edPassword.text.toString()
+
+            Log.d(this@RegisterActivity::class.simpleName, "${name} login ${email} - ${password}")
 
             when {
                 email.isEmpty() or password.isEmpty() -> {
