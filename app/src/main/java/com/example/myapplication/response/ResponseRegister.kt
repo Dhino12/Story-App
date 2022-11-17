@@ -1,15 +1,11 @@
 package com.example.myapplication.response
 
-import com.example.myapplication.model.LoginUser
 import com.google.gson.annotations.SerializedName
 
-data class ResponseLogin (
-    @field:SerializedName("loginResult")
-    val loginResult: LoginUser,
-
+data class ResponseRegister (
     @field:SerializedName("error")
     val error: Boolean,
 
     @field:SerializedName("message")
-    val message: String
+    val message: String,
 )
