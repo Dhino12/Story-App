@@ -13,6 +13,7 @@ internal class UserPreference (context: Context) {
     fun setUser(value: User) {
         val changePref = preference.edit()
         changePref.putString(TOKEN, value.token)
+        changePref.apply()
     }
 
     fun getUser(): User{

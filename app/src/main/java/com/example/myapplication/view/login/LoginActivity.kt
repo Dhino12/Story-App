@@ -12,8 +12,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityLoginScreenBinding
+import com.example.myapplication.model.LoginUser
 import com.example.myapplication.preference.User
 import com.example.myapplication.preference.UserPreference
+import com.example.myapplication.view.main.MainActivity
 import com.example.myapplication.view.register.RegisterActivity
 import com.example.myapplication.viewmodel.LoginViewModel
 import com.example.myapplication.viewmodel.ViewModelFactory
@@ -31,6 +33,7 @@ class LoginActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this, ViewModelFactory(this@LoginActivity))[LoginViewModel::class.java]
+        userPreference = UserPreference(this)
 
         binding.login.setOnClickListener {
             val email = binding.edEmail.text.toString()
@@ -69,6 +72,18 @@ class LoginActivity : AppCompatActivity() {
                     Toast.makeText(this, error.toString(), Toast.LENGTH_SHORT).show()
                 }
             }
+
+            vmLogin.loginResult.observe(this){ user ->
+                Toast.makeText(this, "Login berhasil", Toast.LENGTH_SHORT).show()
+                saveToken(user.loginResult)
+                // to MainMenu
+                startActivity(Intent(this@LoginActivity, MainActivity::class.java))
+            }
         }
+    }
+
+    private fun saveToken(user:LoginUser) {
+        userModel.token = user.token
+        userPreference.setUser(userModel)
     }
 }
