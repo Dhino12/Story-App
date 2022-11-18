@@ -6,6 +6,8 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityMainBinding
 import com.example.myapplication.preference.User
@@ -28,13 +30,11 @@ class MainActivity : AppCompatActivity() {
         userModel = userPreference.getUser()
         token = userModel.token.toString()
 
-        Handler(Looper.getMainLooper()).postDelayed({
-            if(token.isEmpty()) {
-                Log.e(this@MainActivity::class.java.simpleName, "TOKEN : ${token}")
-                startActivity(Intent(this, LoginActivity::class.java))
-                finish()
-            }
-        }, 10)
+        if(token.isEmpty()) {
+            Log.e(this@MainActivity::class.java.simpleName, "TOKEN : ${token}")
+            startActivity(Intent(this, LoginActivity::class.java))
+            finish()
+        }
 
         val fragmentManager = supportFragmentManager
         val fragment = fragmentManager.findFragmentByTag(ListStoryFragment::class.java.simpleName)
@@ -45,6 +45,26 @@ class MainActivity : AppCompatActivity() {
                 .commit()
             Log.d(this@MainActivity::class.java.simpleName, "Fragment Name now : " + ListStoryFragment::class.java.simpleName)
         }
+    }
 
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.main_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.logout -> {
+                logout()
+                true
+            }
+            else -> true
+        }
+    }
+
+    private fun logout() {
+        userModel.token = ""
+        userPreference.setUser(userModel)
+        startActivity(Intent(this, LoginActivity::class.java))
     }
 }
