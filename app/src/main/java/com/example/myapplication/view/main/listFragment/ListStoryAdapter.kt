@@ -13,7 +13,7 @@ import com.example.myapplication.model.Story
 
 class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
     private lateinit var onItemClickCallback: OnItemClickCallback
-    private var data = mutableListOf<Story>()
+    private var datas = mutableListOf<Story>()
 
     interface OnItemClickCallback {
         fun onItemClicked(story: Story)
@@ -24,8 +24,8 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
     }
 
     fun init(story: List<Story>) {
-        data.clear()
-        data = story.toMutableList()
+        datas.clear()
+        datas = story.toMutableList()
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
@@ -34,8 +34,8 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
-        val story = data[position]
-        if (data != null) {
+        val story = datas[position]
+        if (datas != null) {
             holder.bind(story)
             holder.itemView.setOnClickListener{
                 onItemClickCallback.onItemClicked(story)
@@ -43,7 +43,7 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
         }
     }
 
-    override fun getItemCount(): Int = data.size
+    override fun getItemCount(): Int = datas.size
 
     inner class ViewHolder(private val binding: ItemStoryBinding) :
             RecyclerView.ViewHolder(binding.root) {

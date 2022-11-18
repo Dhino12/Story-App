@@ -25,7 +25,7 @@ class StoryViewModel(val context: Context): ViewModel() {
     val storyList = MutableLiveData<List<Story>>()
     val resultPostUpload = MutableLiveData(false)
     var error = MutableLiveData("")
-    private val TAG = StoryViewModel::class.java
+    private val tagClassName = StoryViewModel::class.java
 
     fun getStory(token: String) {
         loading.postValue(View.VISIBLE)
@@ -42,7 +42,7 @@ class StoryViewModel(val context: Context): ViewModel() {
 
             override fun onFailure(call: Call<Stories>, t: Throwable) {
                 loading.postValue(View.GONE)
-                Log.e(TAG.simpleName, "onFailure : ${t.message}")
+                Log.e(tagClassName.simpleName, "onFailure : ${t.message}")
                 error.postValue("${t.message}")
             }
         })
@@ -73,7 +73,7 @@ class StoryViewModel(val context: Context): ViewModel() {
 
             override fun onFailure(call: Call<PostStory>, t: Throwable) {
                 loading.postValue(View.GONE)
-                Log.e(TAG.simpleName, "onFailure.......... : ${t.message}")
+                Log.e(tagClassName.simpleName, "onFailure.......... : ${t.message}")
                 error.postValue(t.message)
             }
 

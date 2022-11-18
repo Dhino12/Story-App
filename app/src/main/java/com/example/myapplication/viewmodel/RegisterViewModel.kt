@@ -13,8 +13,8 @@ import retrofit2.Response
 
 class RegisterViewModel(val context: Context): ViewModel() {
     val loading = MutableLiveData(View.GONE)
-    val error = MutableLiveData("");
-    private val TAG = RegisterViewModel::class.java.simpleName
+    val error = MutableLiveData("")
+    private val tagClassName = RegisterViewModel::class.java.simpleName
 
     fun register(name: String, email: String, password: String) {
         loading.postValue(View.VISIBLE)
@@ -35,7 +35,7 @@ class RegisterViewModel(val context: Context): ViewModel() {
 
             override fun onFailure(call: Call<ResponseRegister>, t: Throwable) {
                 loading.postValue(View.GONE)
-                Log.e(TAG, "onFailure call: ${t.message}")
+                Log.e(tagClassName, "onFailure call: ${t.message}")
                 error.postValue(t.message)
             }
         })

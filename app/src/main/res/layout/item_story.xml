@@ -38,7 +38,7 @@
             card_view:layout_constraintTop_toBottomOf="@id/iv_story"/>
 
         <TextView
-            android:id="@+id/tv_descStory"
+            android:id="@+id/tvDescStory"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"

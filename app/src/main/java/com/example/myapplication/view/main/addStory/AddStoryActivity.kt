@@ -4,23 +4,19 @@ import android.content.ContentResolver
 import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Bitmap
 import android.graphics.BitmapFactory
-import android.graphics.Matrix
 import android.net.Uri
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
 import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
-import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.lifecycle.ViewModelProvider
-import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityAddStoryBinding
 import com.example.myapplication.view.main.MainActivity
 import com.example.myapplication.viewmodel.StoryViewModel
@@ -31,7 +27,6 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.text.SimpleDateFormat
 import java.util.*
-import java.util.jar.Manifest
 
 class AddStoryActivity : AppCompatActivity() {
 
@@ -42,8 +37,6 @@ class AddStoryActivity : AppCompatActivity() {
     private var file: File? = null
 
     companion object {
-        const val EXTRA_PHOTO = "EXTRA_PHOTO"
-        const val EXTRA_CAMERA = "EXTRA_CAMERA"
         val REQUIRED_CAMERA_PERMISSION = arrayOf(android.Manifest.permission.CAMERA)
     }
 
@@ -61,21 +54,13 @@ class AddStoryActivity : AppCompatActivity() {
         token = intent.getStringExtra("extra_token_upload").toString()
         viewModel = ViewModelProvider(this, ViewModelFactory(this))[StoryViewModel::class.java]
 
-        // rearCamera / camera belakang
-//        val isRearCamera = intent?.getBooleanExtra(EXTRA_CAMERA, true) as Boolean
-//        val rotateBitmap = bitmapRotation(BitmapFactory.decodeFile(file?.path), isRearCamera)
-//
-//        binding.pvImage.setImageBitmap(rotateBitmap)
-
-        binding.btnCamera.setOnClickListener {
-            takePhoto()
-        }
+        binding.btnCamera.setOnClickListener { takePhoto() }
 
         binding.btnGallery.setOnClickListener { openGallery() }
 
         binding.btnUpload.setOnClickListener {
             if(token != null && file != null) {
-                uploadImage(file!!, binding.tvDesc.text.toString())
+                uploadImage(file!!, binding.edDesc.text.toString())
             } else {
                 Toast.makeText(this, "Mohon isikan deskripsi", Toast.LENGTH_SHORT).show()
             }
@@ -114,7 +99,7 @@ class AddStoryActivity : AppCompatActivity() {
         val intent = Intent(MediaStore.ACTION_IMAGE_CAPTURE)
         intent.resolveActivity(packageManager)
 
-        createTempFile(application.toString()).also {
+        createTmpFile(application).also {
             val photoUri:Uri = FileProvider.getUriForFile(
                 this@AddStoryActivity,
                 "com.example.myapplication",
@@ -131,7 +116,6 @@ class AddStoryActivity : AppCompatActivity() {
     ) {
         if(it.resultCode === RESULT_OK) {
             file = File(photoPath)
-            file = file
 
             val result = BitmapFactory.decodeFile(file?.path)
             binding.pvImage.setImageBitmap(result)

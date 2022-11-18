@@ -25,7 +25,7 @@ class LoginActivity : AppCompatActivity() {
     private lateinit var binding: ActivityLoginScreenBinding
     private var userModel: User = User()
     private lateinit var userPreference: UserPreference
-    private var viewModel: LoginViewModel? = null;
+    private var viewModel: LoginViewModel? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

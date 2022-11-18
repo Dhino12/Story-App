@@ -16,10 +16,10 @@ class LoginViewModel (private val context: Context): ViewModel() {
     val loginResult = MutableLiveData<ResponseLogin>()
     val error = MutableLiveData("")
     val loading = MutableLiveData(View.GONE)
-    private val TAG = LoginViewModel::class.java.simpleName
+    private val tagClassName = LoginViewModel::class.java.simpleName
 
     fun login(email: String, password: String) {
-        Log.d(TAG, email)
+        Log.d(tagClassName, email)
         val client = ApiConfig.getApiService().login(email, password)
 
         client.enqueue(object : Callback<ResponseLogin> {
@@ -35,7 +35,7 @@ class LoginViewModel (private val context: Context): ViewModel() {
 
             override fun onFailure(call: Call<ResponseLogin>, t: Throwable) {
                 loading.postValue(View.GONE)
-                Log.e(TAG, "onFailure... : ${t.message}")
+                Log.e(tagClassName, "onFailure... : ${t.message}")
                 error.postValue(t.message)
             }
         })
