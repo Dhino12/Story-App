@@ -16,7 +16,7 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
     private var datas = mutableListOf<Story>()
 
     interface OnItemClickCallback {
-        fun onItemClicked(story: Story)
+        fun onItemClicked(story: Story, view: View)
     }
 
     fun setOnItemClickCallback(onItemClickCallback: OnItemClickCallback) {
@@ -37,8 +37,8 @@ class ListStoryAdapter : RecyclerView.Adapter<ListStoryAdapter.ViewHolder>() {
         val story = datas[position]
         if (datas != null) {
             holder.bind(story)
-            holder.itemView.setOnClickListener{
-                onItemClickCallback.onItemClicked(story)
+            holder.itemView.setOnClickListener{ view ->
+                onItemClickCallback.onItemClicked(story, view)
             }
         }
     }

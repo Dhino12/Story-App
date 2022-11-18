@@ -8,7 +8,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.app.ActivityOptionsCompat
+import androidx.core.util.Pair
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -91,21 +95,31 @@ class ListStoryFragment : Fragment() {
                     notifyDataSetChanged()
                 }
                 adapter.setOnItemClickCallback(object : ListStoryAdapter.OnItemClickCallback {
-                    override fun onItemClicked(story: Story) {
-                        showSelectedStory(story)
+                    override fun onItemClicked(story: Story, view: View) {
+                        showSelectedStory(story, view)
                     }
                 })
             }
         }
     }
 
-    private fun showSelectedStory(story: Story) {
+    private fun showSelectedStory(story: Story, view: View) {
+        val ivStory = view.findViewById<ImageView>(R.id.iv_story)
+        val tvName = view.findViewById<TextView>(R.id.tv_name)
+        val tvDescStory = view.findViewById<TextView>(R.id.tvDescStory)
+        val optionCompat: ActivityOptionsCompat = ActivityOptionsCompat.makeSceneTransitionAnimation(
+            (activity as Activity),
+            Pair(ivStory, "profile"),
+            Pair(tvDescStory, "desc"),
+            Pair(tvName, "name"),
+        )
         Intent(activity, DetailActivity::class.java).also {
             it.putExtra(DetailActivity.KEY_NAME, story.name)
             it.putExtra(DetailActivity.KEY_DATE, story.createdAt)
             it.putExtra(DetailActivity.KEY_DESC, story.description)
             it.putExtra(DetailActivity.KEY_IMAGE, story.photoUrl)
-            startActivity(it)
+
+            startActivity(it, optionCompat.toBundle())
         }
     }
 }
