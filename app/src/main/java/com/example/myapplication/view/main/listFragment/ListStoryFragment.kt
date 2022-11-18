@@ -3,6 +3,7 @@ package com.example.myapplication.view.main.listFragment
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -19,6 +20,7 @@ import com.example.myapplication.model.Story
 import com.example.myapplication.preference.User
 import com.example.myapplication.preference.UserPreference
 import com.example.myapplication.view.detail.DetailActivity
+import com.example.myapplication.view.main.addStory.AddStoryActivity
 import com.example.myapplication.viewmodel.StoryViewModel
 import com.example.myapplication.viewmodel.ViewModelFactory
 
@@ -54,9 +56,15 @@ class ListStoryFragment : Fragment() {
         userModel = userPreference.getUser()
 
         token = userModel.token.toString()
+        Log.e(this@ListStoryFragment::class.java.simpleName, "token listStory : $token")
+
+        binding.fabAddStory.setOnClickListener{
+            val intent = Intent(activity, AddStoryActivity::class.java)
+            intent.putExtra("extra_token_upload", token)
+            startActivity(intent)
+        }
 
         getStory()
-
     }
 
     private fun getStory() {
