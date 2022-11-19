@@ -1,5 +1,6 @@
 package com.example.myapplication.view.register
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -8,6 +9,7 @@ import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import com.example.myapplication.R
 import com.example.myapplication.databinding.ActivityRegisterBinding
+import com.example.myapplication.view.login.LoginActivity
 import com.example.myapplication.viewmodel.RegisterViewModel
 import com.example.myapplication.viewmodel.ViewModelFactory
 
@@ -22,6 +24,10 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         viewModel = ViewModelProvider(this, ViewModelFactory(this))[RegisterViewModel::class.java]
+
+        binding.login.setOnClickListener {
+            startActivity(Intent(this@RegisterActivity, LoginActivity::class.java))
+        }
 
         binding.register.setOnClickListener {
             val name = binding.edName.text.toString()

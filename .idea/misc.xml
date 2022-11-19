@@ -5,12 +5,14 @@
       <map>
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/drawable/add.xml" value="0.229" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/drawable/ic_baseline_add_24.xml" value="0.229" />
+        <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/drawable/ic_baseline_image_24.xml" value="0.199" />
+        <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/drawable/ic_launcher_background.xml" value="0.199" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/drawable/shape_rectangle_corner.xml" value="0.229" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/activity_add_story.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/activity_detail.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/activity_login_screen.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/activity_main.xml" value="0.22826086956521738" />
-        <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/activity_register.xml" value="0.1" />
+        <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/activity_register.xml" value="0.2" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/fragment_list.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/fragment_list_story.xml" value="0.22826086956521738" />
         <entry key="..\:/Project/Android-Dev-Seasons-3-New/27_Submission/Story-App/app/src/main/res/layout/item_story.xml" value="0.2076923076923077" />

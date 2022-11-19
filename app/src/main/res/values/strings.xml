@@ -1,18 +1,20 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Story App</string>
 
     <string name="password">Password</string>
     <string name="login">Login</string>
 
+    <!--  item_story  -->
     <string name="name">Name</string>
-    <string name="image_story">Image</string>
+    <string name="image">Image</string>
     <string name="description">Description</string>
     <string name="date">Date</string>
     <string name="upload">Upload</string>
     <string name="add">Add</string>
 
-    <string name="welcome_login">Silahkan login untuk mulai bercerita.</string>
-    <string name="welcome_register">Silahkan mendaftar untuk menambahkan akun</string>
+    <!--  login & register -->
+    <string name="say_login">Silahkan login untuk mulai bercerita.</string>
+    <string name="say_register">Silahkan mendaftar untuk menambahkan akun</string>
     <string name="register">Register</string>
     <string name="msg_email">Email</string>
     <string name="hint_email">masukan email kamu</string>

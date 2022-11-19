@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/white"
+    android:background="@color/white_500"
     tools:context=".view.register.RegisterActivity">
 
     <ImageView
@@ -36,7 +36,7 @@
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="5dp"
-        android:text="@string/welcome_register"
+        android:text="@string/say_register"
         android:textAlignment="center"
         app:layout_constraintTop_toBottomOf="@id/title_page"/>
 
@@ -112,7 +112,7 @@
         android:layout_marginHorizontal="32dp"
         android:layout_marginTop="21dp"
         android:text="@string/register"
-        android:textColor="@color/white"
+        android:textColor="@color/white_500"
         android:background="@drawable/shape_rectangle_corner"
         android:backgroundTint="@color/purple_700"
         app:layout_constraintStart_toStartOf="parent"

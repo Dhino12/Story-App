@@ -27,7 +27,7 @@
         app:layout_constraintBottom_toBottomOf="@id/rv_story"
         app:layout_constraintEnd_toEndOf="@id/rv_story"
         app:srcCompat="@drawable/ic_baseline_add_24"
-        android:tint="@color/white"/>
+        android:tint="@color/white_500"/>
 
     <ProgressBar
         android:id="@+id/progress_bar"

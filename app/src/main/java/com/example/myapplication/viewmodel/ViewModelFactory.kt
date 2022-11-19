@@ -9,15 +9,15 @@ class ViewModelFactory(private val context: Context):
 
     @Suppress("UNCHECKED_CAST")
     override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        when {
+        return when {
             modelClass.isAssignableFrom(LoginViewModel::class.java) -> {
-                return LoginViewModel(context) as T
+                LoginViewModel(context) as T
             }
             modelClass.isAssignableFrom(RegisterViewModel::class.java) -> {
-                return RegisterViewModel(context) as T
+                RegisterViewModel(context) as T
             }
             modelClass.isAssignableFrom(StoryViewModel::class.java) -> {
-                return  StoryViewModel(context) as T
+                StoryViewModel(context) as T
             }
             else -> throw IllegalArgumentException("Unknown viewmodel class : " + modelClass.name )
         }
