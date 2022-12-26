@@ -1,8 +1,15 @@
 package com.example.myapplication.model
 
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 import com.google.gson.annotations.SerializedName
 
+@Entity(tableName = "story")
 data class Story (
+    @PrimaryKey
+    @field:SerializedName("id")
+    val id: String,
+
     @field:SerializedName("name")
     val name: String,
 
@@ -15,12 +22,9 @@ data class Story (
     @field:SerializedName("createdAt")
     val createdAt: String,
 
-    @field:SerializedName("lon")
-    val lon: Any,
-
     @field:SerializedName("lat")
-    val lat: Any,
+    val lat: String? = null,
 
-    @field:SerializedName("id")
-    val id: String
+    @field:SerializedName("lon")
+    val lon: String? = null
 )

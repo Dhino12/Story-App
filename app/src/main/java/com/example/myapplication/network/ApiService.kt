@@ -13,30 +13,39 @@ interface ApiService{
 
     @FormUrlEncoded
     @POST("login")
-    fun login(
-        @Field(encoded = false, value = "email") email: String,
+    suspend fun login(
+        @Field("email") email: String,
         @Field("password") password: String
-    ): Call<ResponseLogin>
+    ): ResponseLogin
 
     @FormUrlEncoded
     @POST("register")
-    fun register(
+    suspend fun register(
         @Field("name") name: String,
         @Field("email") email: String,
         @Field("password") password: String,
-    ):Call<ResponseRegister>
+    ):ResponseRegister
 
     @GET("stories")
-    fun getListStory(
+    suspend fun getListStory(
+        @Header("Authorization") token: String,
+        @Query("page") page: Int,
+        @Query("size") size: Int
+    ): Stories
+
+    @GET("stories?location=1")
+    suspend fun getStoryListLocation(
         @Header("Authorization") token: String,
         @Query("size") size: Int
-    ): Call<Stories>
-    
+    ): Stories
+
     @Multipart
     @POST("stories")
-    fun postStory(
+    suspend fun postStory(
         @Header("Authorization") token:String,
         @Part("description") description: RequestBody,
-        @Part file: MultipartBody.Part
-    ): Call<PostStory>
+        @Part file: MultipartBody.Part,
+        @Part lat: Double,
+        @Part lng: Double
+    ): PostStory
 }
