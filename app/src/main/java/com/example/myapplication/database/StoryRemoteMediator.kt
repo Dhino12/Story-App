@@ -9,6 +9,7 @@ import androidx.room.withTransaction
 import com.example.myapplication.model.Story
 import com.example.myapplication.model.StoryRemoteKeys
 import com.example.myapplication.network.ApiService
+import com.example.myapplication.utils.wrapEspressoIdlingResource
 
 @OptIn(ExperimentalPagingApi::class)
 class StoryRemoteMediator (
@@ -45,28 +46,30 @@ class StoryRemoteMediator (
             }
         }
 
-        return try {
-            val responseData = apiService.getListStory(token, page, state.config.pageSize).listStory
+        wrapEspressoIdlingResource {
+            return try {
+                val responseData = apiService.getListStory(token, page, state.config.pageSize).listStory
 
-            val endOfPagingReached = responseData.isEmpty()
-            database.withTransaction {
-                if (loadType == LoadType.REFRESH) {
-                    database.storyRemoteKeysDao().deleteRemoteKeys()
-                    database.storyDao().deleteAll()
-                }
+                val endOfPagingReached = responseData.isEmpty()
+                database.withTransaction {
+                    if (loadType == LoadType.REFRESH) {
+                        database.storyRemoteKeysDao().deleteRemoteKeys()
+                        database.storyDao().deleteAll()
+                    }
 
-                val prevKey = if(page == 1) null else page - 1
-                val nextKey = if(endOfPagingReached) null else page + 1
-                val keys = responseData.map { story ->
-                    StoryRemoteKeys(id = story.id, prevKey = prevKey, nextKey = nextKey)
+                    val prevKey = if(page == 1) null else page - 1
+                    val nextKey = if(endOfPagingReached) null else page + 1
+                    val keys = responseData.map { story ->
+                        StoryRemoteKeys(id = story.id, prevKey = prevKey, nextKey = nextKey)
+                    }
+                    database.storyRemoteKeysDao().insertAll(keys)
+                    database.storyDao().insertStory(responseData)
                 }
-                database.storyRemoteKeysDao().insertAll(keys)
-                database.storyDao().insertStory(responseData)
+                MediatorResult.Success(endOfPaginationReached = endOfPagingReached)
+            } catch (exception: Exception) {
+                Log.e("testErro", exception.toString())
+                MediatorResult.Error(exception)
             }
-            MediatorResult.Success(endOfPaginationReached = endOfPagingReached)
-        } catch (exception: Exception) {
-            Log.e("testErro", exception.toString())
-            MediatorResult.Error(exception)
         }
     }
 

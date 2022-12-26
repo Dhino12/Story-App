@@ -35,6 +35,9 @@ android {
     buildFeatures{
         viewBinding true
     }
+    testOptions {
+        animationsDisabled = true
+    }
 }
 
 dependencies {
@@ -85,11 +88,12 @@ dependencies {
     testImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
     testImplementation 'org.mockito:mockito-core:4.0.0'
     testImplementation 'org.mockito:mockito-inline:3.12.4'
+    //mock web server
+    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
+    androidTestImplementation "com.squareup.okhttp3:okhttp-tls:4.9.3"
 
     androidTestImplementation "androidx.arch.core:core-testing:2.1.0"
     androidTestImplementation "org.jetbrains.kotlinx:kotlinx-coroutines-test:1.6.0"
-    androidTestImplementation "com.squareup.okhttp3:mockwebserver:4.9.3"
-    androidTestImplementation "com.squareup.okhttp3:okhttp-tls:4.9.3"
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:3.0.2'
 
     implementation 'androidx.test.espresso:espresso-idling-resource:3.4.0'

@@ -45,7 +45,7 @@ interface ApiService{
         @Header("Authorization") token:String,
         @Part("description") description: RequestBody,
         @Part file: MultipartBody.Part,
-        @Part lat: Double,
-        @Part lng: Double
+        @Part("lat") lat: Double,
+        @Part("lon") lon: Double
     ): PostStory
 }

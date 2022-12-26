@@ -97,15 +97,22 @@ class AddStoryActivity : AppCompatActivity() {
                 ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), 101)
                 return
             }
-            val nowLocation = fusedLocationProvideClient.lastLocation
-            nowLocation?.addOnSuccessListener { location: Location ->
-                val lat: Double = location.latitude
-                val lng: Double = location.longitude
-                val imageMultipart = MultipartBody.Part.createFormData(
-                    "photo", image.name, image.asRequestBody("image/jpeg".toMediaTypeOrNull())
+            val nowLocation = fusedLocationProvideClient?.lastLocation
+            Log.e("location", nowLocation.toString())
+            nowLocation?.addOnSuccessListener { location: Location? ->
+                val lat: Double = location?.latitude ?: 0.0
+                val lng: Double = location?.longitude ?: 0.1
+                val requestImageFile = image.asRequestBody("image/jpeg".toMediaTypeOrNull())
+                val imageMultipart:MultipartBody.Part = MultipartBody.Part.createFormData(
+                    "photo",
+                    image.name,
+                    requestImageFile
                 )
                 val descriptionRequestBody = description.toRequestBody("text/plain".toMediaType())
 
+                Log.e("test", lat.toString())
+                Log.e("test", lng.toString())
+                Log.e("test", imageMultipart.toString())
                 viewModel?.postStory(token, imageMultipart, descriptionRequestBody, lat, lng )
                     ?.observe(this){ result ->
                     if (result == null) return@observe
